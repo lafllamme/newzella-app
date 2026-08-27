@@ -1,0 +1,27 @@
+@import './newzella-trio.css';
+@import './newzella-new-trio.css';
+
+/* Nuxt shell: keep the migrated concepts visually self-contained. */
+html,
+body,
+#__nuxt {
+  min-height: 100%;
+}
+
+body {
+  min-width: 320px;
+}
+
+/* Local mirror for deterministic previews; original remote URLs stay in the data registry. */
+.v1 {
+  --hero-image: url('/images/hero-back.jpeg');
+  --story-image: url('/images/brotbild.jpeg');
+}
+
+.n2 .hero {
+  background-image: linear-gradient(90deg, rgba(36, 19, 14, .9) 0%, rgba(36, 19, 14, .46) 46%, rgba(36, 19, 14, .28) 100%), url('/images/hero-back.jpeg');
+}
+
+.n3 .atlas-card {
+  background-image: linear-gradient(180deg, rgba(36, 19, 14, .12), rgba(36, 19, 14, .82)), url('/images/brotbild.jpeg');
+}

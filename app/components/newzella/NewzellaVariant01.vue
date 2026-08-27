@@ -1,0 +1,39 @@
+<script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+
+const root = ref<HTMLElement | null>(null)
+let observer: IntersectionObserver | undefined
+
+onMounted(() => {
+  const elements = [...(root.value?.querySelectorAll<HTMLElement>('.reveal') ?? [])]
+
+  if (elements.length === 0) return
+
+  if (!('IntersectionObserver' in window)) {
+    elements.forEach((element) => element.classList.add('in', 'is-visible'))
+    return
+  }
+
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in', 'is-visible')
+          observer?.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.14 },
+  )
+
+  elements.forEach((element) => observer?.observe(element))
+})
+
+onBeforeUnmount(() => observer?.disconnect())
+</script>
+
+<template>
+  <div ref="root" class="v1">
+  <!-- THESIS: Bakery craft becomes a generous editorial invitation; rejects a generic restaurant menu. OWN-WORLD: yellow, burgundy, rounded paper surfaces and quiet serif typography. STORY: discover today's bakery, trust the family craft, find a nearby shop. FIRST VIEWPORT: warm yellow-led headline left, oversized bakery image right, primary CTA below the claim. FORM: editorial bakery homepage, grounded direction seed d9e1f260. FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md --><header class="sitebar"><a href="#top"><img class="logo" :src="'/images/newzella-logo.png'" alt="Newzella Bäckerei Konditorei"></a><nav class="nav"><a href="#sortiment">Backwaren</a><a href="#geschichte">Über uns</a><a href="#fachgeschaefte">Fachgeschäfte</a><a href="#neuigkeiten">Aktuelles</a><a class="nav-cta" href="#fachgeschaefte">Fachgeschäft finden</a></nav></header><main id="top"><section class="hero"><div class="container hero-grid"><div><span class="eyebrow">Bäckerei. Konditorei. Seit 1896.</span><h1>Vom Laib<br>mit <em>Seele.</em></h1><p class="hero-copy">Täglich frisch gebacken, natürlich von Hand. Entdecke Brote, Brötchen, feines Gebäck und Torten aus der Newzella Backstube in Köln.</p><a class="cta" href="#sortiment">Unser Sortiment</a></div><div class="hero-media"></div></div></section><section class="section" id="sortiment"><div class="container"><div class="section-head"><div><span class="eyebrow">Was heute Freude macht</span><h2>Gebäcke mit<br>Charakter.</h2></div><p>Von knusprig bis sahnig: Newzella ist wie gebacken für Spezialitäten. Wähle eine Produktwelt und lerne unsere Klassiker kennen.</p></div><div class="products"><article class="product reveal"><div class="product-img" style="background-image:url('/images/brote.jpeg')"></div><div class="product-body"><h3>Brote</h3><p>Ausgesuchte Laibe für jeden Tag.</p></div></article><article class="product reveal"><div class="product-img" style="background-image:url('/images/broetchen.jpeg')"></div><div class="product-body"><h3>Brötchen</h3><p>Knusprige Vielfalt zum Frühstück.</p></div></article><article class="product reveal"><div class="product-img" style="background-image:url('/images/torten.jpeg')"></div><div class="product-body"><h3>Torten</h3><p>Für Feiern und besondere Momente.</p></div></article><article class="product reveal"><div class="product-img" style="background-image:url('/images/apfelberliner.jpeg')"></div><div class="product-body"><h3>Feingebäck</h3><p>Ein bisschen Glück aus der Konditorei.</p></div></article></div></div></section><section class="section" id="geschichte"><div class="container story"><div class="story-img"></div><div class="story-copy"><span class="eyebrow">Vier Generationen Handwerk</span><h2>So beliebt wie kaum ein anderes Lebensmittel: das Brot.</h2><p>Wir backen es täglich und das macht uns sehr stolz. Schon in der vierten Generation fertigt die Familie Newzella diese gesunde Köstlichkeit und vieles mehr – aus der zentralen Backstube in Köln-Heimersdorf.</p><p class="quote">Wasser, Mehl, Salz, Hefe und viel Liebe zum Handwerk.</p><a class="cta" href="#werte">Mehr über Newzella</a></div></div></section><section class="section" id="fachgeschaefte"><div class="container"><div class="section-head"><div><span class="eyebrow">Köln · Leverkusen · Pulheim</span><h2>Dein<br>Fachgeschäft.</h2></div><p>Frische auf dem Weg durch den Tag. Finde deinen nächsten Newzella-Standort mit Öffnungszeiten und Kontaktdaten.</p></div><div class="locations"><div class="location-map"><i class="pin one"></i><i class="pin two"></i><i class="pin three"></i></div><div class="location-list"><h3>Standorte</h3><div class="location"><div><strong>Köln-Heimersdorf</strong><small>Backstube &amp; Fachgeschäft</small></div><span>Öffnen</span></div><div class="location"><div><strong>Köln-Seeberg</strong><small>Fachgeschäft</small></div><span>Öffnen</span></div><div class="location"><div><strong>Köln-Weidenpesch</strong><small>Fachgeschäft</small></div><span>Öffnen</span></div><div class="location"><div><strong>Leverkusen-Alkenrath</strong><small>Café Newzella</small></div><span>Öffnen</span></div><div class="location"><div><strong>Leverkusen-Wiesdorf</strong><small>Fachgeschäft</small></div><span>Öffnen</span></div><div class="location"><div><strong>Pulheim Marktplatz</strong><small>Café am Marktplatz</small></div><span>Öffnen</span></div></div></div></div></section><section class="section" id="neuigkeiten"><div class="container"><div class="section-head"><div><span class="eyebrow">Newzella’s Neuigkeiten</span><h2>Frisch aus<br>der Redaktion.</h2></div><p>Aktuelle Hinweise, saisonale Angebote und Geschichten aus dem Unternehmen.</p></div><div class="news-grid"><article class="news feature reveal"><span class="eyebrow">Aktuell</span><h3>Was gerade aus der Backstube kommt.</h3><p>Öffnungszeiten, Feiertage und saisonale Lieblinge auf einen Blick.</p><a class="pill" href="#">Alle Neuigkeiten</a></article><article class="news reveal"><span class="eyebrow">Karriere</span><h3>Gemeinsam backen.</h3><p>Handwerkstradition, familiäres Miteinander und neue Perspektiven.</p><a class="pill" href="#">Stellenangebote</a></article><article class="news reveal"><span class="eyebrow">Engagement</span><h3>Mehr als eine Tüte.</h3><p>Newzella übernimmt Verantwortung und bleibt nah an den Menschen.</p><a class="pill" href="#">Unser Engagement</a></article></div></div></section><section class="section" id="werte"><div class="container"><div class="values"><article class="value reveal"><span class="eyebrow">01</span><h3>Handwerk</h3><p>Tradition, die jeden Morgen frisch beginnt.</p></article><article class="value reveal"><span class="eyebrow">02</span><h3>Nähe</h3><p>Fachgeschäfte mitten in den Veedeln.</p></article><article class="value reveal"><span class="eyebrow">03</span><h3>Haltung</h3><p>Ausbildung, Vielfalt und Engagement.</p></article></div></div></section></main><footer class="footer"><div class="container footer-grid"><div><h2>Bäckerei.<br>Konditorei.<br>Seit 1896.</h2></div><div><h3>Kontakt</h3><p>mail@baeckerei-newzella.de<br>www.baeckerei-newzella.de</p></div><div><h3>Entdecken</h3><p><a href="#sortiment">Backwaren</a><br><a href="#fachgeschaefte">Fachgeschäfte</a><br><a href="#geschichte">Über uns</a></p></div><div><h3>Hinweise</h3><p><a href="#">Impressum</a><br><a href="#">Datenschutz</a><br><a href="#">Karriere</a></p></div></div><div class="container footer-bottom"><span>Newzella · Köln, Leverkusen &amp; Pulheim</span><span>Mit Liebe zum Handwerk</span></div></footer>
+  </div>
+</template>

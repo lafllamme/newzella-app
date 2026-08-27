@@ -9,7 +9,7 @@ Create an isolated Nuxt 4 app for the Newzella brand refresh so the four reviewe
 - Project location: `/Users/flame/Developer/Projects/newzella-app`.
 - Keep the current Newzella content, section order, image assignments, and visual character as the source of truth.
 - Keep the known corporate colors visible: primary yellow, burgundy/red, warm brown/espresso, and cream. The latter two remain supporting colors and may be tuned later.
-- Reuse the supplied Imgur URLs for the logo and content imagery instead of introducing a local asset pipeline in this first pass.
+- Keep the supplied Imgur URLs in the typed content registry, and mirror those user-provided assets into `public/images/` for deterministic local/CI previews. The remote URLs remain the source references for the later hosting decision.
 - Use Nuxt 4, Vue 3, TypeScript, PNPM, and UnoCSS. Do not introduce a large design-token system or a component library.
 - Use a small shared CSS layer where exact layout, typography, image cropping, z-index, and responsive behavior need more control than utility classes provide.
 
@@ -79,7 +79,7 @@ The data layer is deliberately plain TypeScript objects. It is not a CMS abstrac
 
 - Use semantic landmarks and headings, meaningful image alt text, visible keyboard focus, and touch targets of at least 44px where controls are interactive.
 - Set the document language to German and provide route-specific titles/descriptions.
-- External images remain standard `<img>` elements initially so the migration stays transparent; image optimization can be introduced later once hosting and caching decisions are known.
+- Mirrored images remain standard `<img>`/CSS image references initially so the migration stays transparent; image optimization can be introduced later once hosting and caching decisions are known.
 
 ## Verification criteria
 
