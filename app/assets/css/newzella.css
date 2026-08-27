@@ -12,6 +12,75 @@ body {
   min-width: 320px;
 }
 
+.newzella-app-shell { min-height: 100%; }
+
+.newzella-route-switcher {
+  position: fixed;
+  z-index: 40;
+  top: clamp(6.5rem, 19vh, 11rem);
+  left: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .5rem;
+  color: var(--espresso, #24130e);
+  font-family: var(--body, Arial, sans-serif);
+}
+
+.newzella-route-switcher__toggle {
+  position: relative;
+  display: inline-flex;
+  width: 3.1rem;
+  height: 3.1rem;
+  align-items: center;
+  justify-content: center;
+  padding: .65rem;
+  border: 1px solid rgba(255, 245, 230, .8);
+  border-radius: 999px;
+  background: var(--cream, #fff5e6);
+  color: var(--burgundy, #8b0e13);
+  cursor: pointer;
+  transition: transform .28s cubic-bezier(.22, 1, .36, 1), background-color .2s ease;
+}
+
+.newzella-route-switcher__toggle:hover { transform: translateX(3px); background: var(--yellow, #ffe123); }
+.newzella-route-switcher__icon { position: absolute; top: 50%; left: 50%; width: 1.15rem; height: 1.15rem; transform: translate(-50%, -50%); transition: left .28s cubic-bezier(.22, 1, .36, 1), transform .28s cubic-bezier(.22, 1, .36, 1); }
+.newzella-route-switcher__word { position: absolute; top: 50%; left: 2.3rem; font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; opacity: 0; transform: translate(-.4rem, -50%); transition: opacity .2s ease, transform .28s cubic-bezier(.22, 1, .36, 1); white-space: nowrap; }
+.newzella-route-switcher__chevron { position: absolute; top: 50%; right: .8rem; width: .85rem; height: .85rem; opacity: 0; transform: translateY(-50%) rotate(-90deg); transition: opacity .2s ease, transform .28s ease; }
+.newzella-route-switcher.is-open .newzella-route-switcher__toggle { width: 8.7rem; }
+.newzella-route-switcher.is-open .newzella-route-switcher__icon { left: .85rem; transform: translateY(-50%); }
+.newzella-route-switcher.is-open .newzella-route-switcher__word { opacity: 1; transform: translate(0, -50%); }
+.newzella-route-switcher.is-open .newzella-route-switcher__chevron { opacity: 1; transform: translateY(-50%) rotate(0); }
+
+.newzella-route-switcher__panel {
+  width: min(17rem, calc(100vw - 1.5rem));
+  max-height: calc(100vh - 8rem);
+  overflow: auto;
+  padding: .65rem;
+  border-radius: 1.25rem;
+  background: var(--cream, #fff5e6);
+  box-shadow: 0 16px 40px rgba(36, 19, 14, .2);
+}
+
+.newzella-route-switcher__panel-head { display: flex; align-items: center; justify-content: space-between; padding: .5rem .6rem .65rem; color: var(--burgundy, #8b0e13); font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.newzella-route-switcher__link { display: grid; grid-template-columns: 2rem 1fr auto; gap: .6rem; align-items: center; padding: .72rem .6rem; border-radius: .9rem; color: var(--espresso, #24130e); transition: background-color .2s ease, color .2s ease, transform .2s ease; }
+.newzella-route-switcher__link:hover { background: var(--paper, #f3e5d3); transform: translateX(2px); }
+.newzella-route-switcher__link.is-active { background: var(--yellow, #ffe123); }
+.newzella-route-switcher__number { display: grid; width: 1.8rem; height: 1.8rem; place-items: center; border: 1px solid currentColor; border-radius: 50%; color: var(--burgundy, #8b0e13); font-size: .68rem; font-weight: 800; }
+.newzella-route-switcher__copy { min-width: 0; }
+.newzella-route-switcher__copy strong, .newzella-route-switcher__copy small { display: block; }
+.newzella-route-switcher__copy strong { overflow: hidden; font-size: .83rem; line-height: 1.15; text-overflow: ellipsis; white-space: nowrap; }
+.newzella-route-switcher__copy small { margin-top: .16rem; color: rgba(36, 19, 14, .62); font-size: .69rem; line-height: 1.15; }
+.newzella-route-switcher__arrow { width: 1rem; height: 1rem; color: var(--burgundy, #8b0e13); }
+
+.newzella-switcher-enter-active, .newzella-switcher-leave-active { transition: opacity .2s ease, transform .28s cubic-bezier(.22, 1, .36, 1); transform-origin: top left; }
+.newzella-switcher-enter-from, .newzella-switcher-leave-to { opacity: 0; transform: translateY(-.5rem) scale(.97); }
+
+@media (max-width: 620px) {
+  .newzella-route-switcher { top: 5.75rem; left: .75rem; }
+  .newzella-route-switcher__panel { max-height: calc(100vh - 7rem); }
+}
+
 /* Local mirror for deterministic previews; original remote URLs stay in the data registry. */
 .v1 {
   --hero-image: url('/images/hero-back.jpeg');
