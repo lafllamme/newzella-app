@@ -2,7 +2,7 @@
 
 Nuxt 4 workspace holding four brand-refresh concepts for Newzella, a family-run bakery and confectionery business in Köln, Leverkusen and Pulheim. Each concept is a full route, so visual directions can be compared side by side before one is chosen.
 
-> Design exploration, not a production site. This is a concept workspace for evaluating visual directions; it is not the official Newzella website.
+> Work in progress. This workspace holds the design decisions for Newzella in Köln. The concepts are still being evaluated and no direction is final.
 
 ## Concepts
 
@@ -80,7 +80,7 @@ Product scope, users, positioning, and the fixed brand anchors are documented in
 
 ## Status
 
-The migration is an early pass. Content stays grounded in the existing site and must not be invented; online ordering, live inventory, and payment are explicitly out of scope. Brand assets and the Newzella name belong to the business.
+The migration is an early pass and the visual direction is still open. Content stays grounded in the existing site and must not be invented; online ordering, live inventory, and payment are explicitly out of scope.
 
 ## License
 
